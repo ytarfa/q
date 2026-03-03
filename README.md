@@ -1,6 +1,6 @@
 # q
 
-A CLI tool to quickly query an LLM from your terminal. Zero external dependencies — just Go's standard library.
+A CLI tool to quickly query an LLM from your terminal.
 
 ```
 $ q what is a goroutine

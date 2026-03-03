@@ -6,12 +6,13 @@ package main
 // If no word boundary is found, the response is hard-cut at the limit.
 // An ellipsis "..." is appended to truncated responses (not counted against the limit).
 func truncateResponse(response string, limit int) string {
-	if limit <= 0 || len(response) <= limit {
+	runes := []rune(response)
+	if limit <= 0 || len(runes) <= limit {
 		return response
 	}
 
 	// Find the last space within the limit
-	truncated := response[:limit]
+	truncated := runes[:limit]
 	lastSpace := -1
 	for i := len(truncated) - 1; i >= 0; i-- {
 		if truncated[i] == ' ' {
@@ -21,9 +22,9 @@ func truncateResponse(response string, limit int) string {
 	}
 
 	if lastSpace > 0 {
-		return truncated[:lastSpace] + "..."
+		return string(truncated[:lastSpace]) + "..."
 	}
 
 	// No word boundary found -- hard-cut at limit
-	return truncated + "..."
+	return string(truncated) + "..."
 }
